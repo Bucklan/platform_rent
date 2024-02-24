@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {EventIndexComponent} from "./event/index/index.component";
-import {WashIndexComponent} from "./wash/index/index.component";
 import {CommonModule} from "@angular/common";
+import {WashIndexComponent} from "./wash/wash-index/wash-index.component";
 
 
 @Component({
