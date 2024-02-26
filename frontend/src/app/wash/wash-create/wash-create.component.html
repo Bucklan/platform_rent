@@ -1,35 +1,22 @@
-<div class="container">
-  <h1>Create Wash</h1>
-  <div *ngIf="!submitted">
-    <mat-form-field class="example-full-width">
-      <mat-label>Wash Name</mat-label>
-      <input matInput [(ngModel)]="wash.name" name="name">
+
+<div *ngIf="!submitted; else elseBlock">
+  <div class="container">
+    <mat-form-field>
+      <input matInput placeholder="First Name" name="firstName" [(ngModel)]="wash.name" required>
     </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-      <mat-label>address</mat-label>
-      <input matInput [(ngModel)]="wash.address">
+    <mat-form-field>
+      <input matInput placeholder="Address" name="address" [(ngModel)]="wash.address" required>
     </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-      <mat-label>address</mat-label>
-      <!--          <input type="checkbox" matInput [(ngModel)]="wash.open">-->
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-      <mat-label>phone</mat-label>
-      <input matInput>
-    </mat-form-field>
-    <button
-      type="button"
-      (click)="saveWash()"
-      class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
-    >
-      Add
-    </button>
-  </div>
-  <div *ngIf="submitted">
-    <h4>Tutorial was submitted successfully!</h4>
-    <button class="btn btn-success" (click)="newWash()">Add</button>
+<!--    <mat-form-field>-->
+<!--      <input matInput placeholder="Address" name="address" [(ngModel)]="wash.address" required>-->
+<!--    </mat-form-field>-->
+    <button mat-button (click)="addWash()">Create</button>
   </div>
 </div>
+
+<h1 *ngIf="error">{{error}}</h1>
+<ng-template #elseBlock>
+  <h1>Successfully created! if you want create one more wash click add</h1>
+  <button (click)="newWash()">Add</button>
+</ng-template>
+

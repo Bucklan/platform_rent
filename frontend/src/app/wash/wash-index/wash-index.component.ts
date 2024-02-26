@@ -1,35 +1,33 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {NgForOf, NgIf} from "@angular/common";
 import {
   MatCard, MatCardActions,
-  MatCardContent,
-  MatCardFooter,
-  MatCardHeader, MatCardImage,
+  MatCardAvatar, MatCardContent,
+  MatCardHeader,
+  MatCardImage,
   MatCardSubtitle,
   MatCardTitle
 } from "@angular/material/card";
-import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatButton} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
-import {WashCreateComponent} from "../wash-create/wash-create.component";
+import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'wash-index',
   standalone: true,
   imports: [
-    NgForOf,
-    MatCard,
-    MatCardContent,
-    MatCardFooter,
     MatCardHeader,
+    MatCard,
     MatCardTitle,
     MatCardSubtitle,
-    MatCardActions,
-    MatButton,
     MatCardImage,
-    NgIf,
-    MatIconButton,
-    RouterLink
+    MatCardAvatar,
+    MatButton,
+    RouterLink,
+    MatCardActions,
+    MatCardContent,
+    NgForOf,
+    NgIf
   ],
   templateUrl: './wash-index.component.html',
   styleUrl: './wash-index.component.css',

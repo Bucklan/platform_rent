@@ -1,59 +1,61 @@
 import {Component, OnInit} from '@angular/core';
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {WashService} from "../wash.service";
-import {FormGroup, FormsModule} from "@angular/forms";
-import {Wash} from "../wash";
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
+import {MatButton} from "@angular/material/button";
+import {Router, RouterLink} from "@angular/router";
+import {MatOption, MatSelect} from "@angular/material/select";
+import {WashService} from "../wash.service";
+import {Wash} from "../wash";
+import {routes} from "../../app.routes";
 
 @Component({
   selector: 'app-wash-create',
   standalone: true,
   imports: [
-    MatFormField,
-    MatLabel,
+    ReactiveFormsModule,
+    NgIf,
     MatInput,
+    MatFormField,
     FormsModule,
-    NgIf
+    MatButton
   ],
   templateUrl: './wash-create.component.html',
   styleUrl: './wash-create.component.css'
 })
 export class WashCreateComponent {
-
   wash: Wash = {
     name: '',
     address: '',
     open: false,
-  };
-
+  }
+  error: any;
   submitted = false;
 
 
-  constructor(private service: WashService) {
+  constructor(private washService: WashService, private router: Router) {
   }
-  saveWash(): void {
-    const data = {
-      name: this.wash.name,
-      address: this.wash.address,
-      open: this.wash.open
-    };
 
-    this.service.create(data).subscribe({
-      next: (res) => {
-        console.log(res);
+  createNewWashService(): void {
+    // Additional validation and logic can be implemented here before submitting the form
+  }
+
+  addWash() {
+    this.washService.create(this.wash).subscribe(response => {
+
         this.submitted = true;
+        return this.router.navigateByUrl('/wash/index');
       },
-      error: (e) => console.error(e)
-    });
+      error => {
+      this.error = error.error.error;
+      },
+      () => {
+        console.log("The POST observable is now completed.");
+      });
   }
 
-  newWash(): void {
-    this.submitted = false;
-    this.wash = {
-      name: '',
-      address: '',
-      open: false
-    };
+  newWash() {
+
   }
 }

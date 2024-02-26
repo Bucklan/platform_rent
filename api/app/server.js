@@ -62,9 +62,13 @@ app.get('/api/washes', async (req, res) => {
 });
 
 app.post('/api/washes', async (req, res) => {
-    const wash = new Wash(req.body);
-    await wash.save();
-    res.status(201).json(wash);
+    if (req.body.name === '' && req.body.address === '') {
+        res.status(400).json({error: 'Name and address is required'});
+    } else {
+        const wash = new Wash(req.body);
+        await wash.save();
+        res.status(201).json(wash);
+    }
 });
 
 app.listen(port, (error) => {
