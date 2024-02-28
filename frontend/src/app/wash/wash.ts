@@ -1,5 +1,5 @@
 export interface Wash{
-    id ?: any;
+    _id ?: any;
     name: string;
     address: string;
     open: boolean;

@@ -1,8 +1,14 @@
 <div class="row">
     <div class="col-12">
       <button mat-stroked-button routerLink="/wash/create">Create Wash</button>
+      <button mat-stroked-button routerLink="/users">Users List</button>
+      <button mat-stroked-button routerLink="/register">Register</button>
+      <button mat-stroked-button routerLink="/login">Login</button>
     </div>
   </div>
+
+
+
 <div class="container">
   <mat-card class="card" *ngFor="let wash of washes">
   <mat-card-header>
@@ -21,7 +27,7 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-stroked-button class="mat-button">DETAILS</button>
+    <button mat-stroked-button class="mat-button" (click)="deleteWash(wash._id)">Delete</button>
   </mat-card-actions>
 </mat-card>
 </div>

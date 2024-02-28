@@ -7,11 +7,20 @@ const UserSchema = new mongoose.Schema({
     },
     surname: {
         type: String,
+        required: false
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        min: 6,
         required: true
     },
     birth_date: {
         type: Date,
-        required: true
+        required: false
     },
     have_car: {
         type: Boolean,
@@ -27,4 +36,5 @@ const UserSchema = new mongoose.Schema({
     },
 });
 
-// export default mongoose.Model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
+module.exports = User;

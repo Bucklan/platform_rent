@@ -1,0 +1,21 @@
+
+<div class="row">
+  <div class="col-12">
+    <button mat-stroked-button routerLink="/wash/index">Washes</button>
+  </div>
+</div>
+<div class="container">
+  <mat-card class="card" *ngFor="let user of users">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title>Name: {{user.name}}</mat-card-title>
+    </mat-card-header>
+
+    <img mat-card-image class="mat-card-image" src="https://avatars.mds.yandex.net/i?id=5be28fe5ca25edadbb4bbd188607d398_l-5743633-images-thumbs&n=13" alt="Photo of a Mercedes-Benz">
+    <br>
+    <mat-card-content>
+      <p>Address: {{user.email}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

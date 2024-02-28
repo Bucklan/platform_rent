@@ -11,6 +11,9 @@ import {
 import {MatButton} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
+import {WashService} from "../wash.service";
+import {Wash} from "../wash";
+import {MatTable} from "@angular/material/table";
 
 @Component({
   selector: 'wash-index',
@@ -27,22 +30,31 @@ import {NgForOf, NgIf} from "@angular/common";
     MatCardActions,
     MatCardContent,
     NgForOf,
-    NgIf
+    NgIf,
+    MatTable
   ],
   templateUrl: './wash-index.component.html',
   styleUrl: './wash-index.component.css',
 })
-export class WashIndexComponent implements OnInit{
-  washes: any[] = []
-  http = inject(HttpClient);
-  getUrl = 'http://localhost:4444/api/washes';
+export class WashIndexComponent implements OnInit {
+  constructor(private WashService: WashService,) {
+  }
+  washes: Wash[] = []
+  // http = inject(HttpClient);
+  // getUrl = 'http://localhost:4444/api/washes';
   ngOnInit(): void {
     this.getWashes();
   }
 
   getWashes(): void {
-    this.http.get(this.getUrl).subscribe((res: any) => {
+    this.WashService.index().subscribe((res: any) => {
       this.washes = res;
+    });
+  }
+
+  deleteWash(id: number) {
+    this.WashService.destroy(id).subscribe((wash: Wash) => {
+      this.washes = this.washes.filter((wash: Wash) => wash._id !== id);
     });
   }
 

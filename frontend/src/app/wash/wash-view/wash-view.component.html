@@ -1,0 +1,83 @@
+<div *ngIf="viewMode;else elseBlock">
+  <div *ngIf="wash._id;else elseSecond">
+    <h4>Tutorial</h4>
+    <div>
+      <label><strong>Title:</strong></label> {{ wash.name }}
+    </div>
+    <div>
+      <label><strong>Description:</strong></label>
+      {{ wash.address }}
+    </div>
+    <div>
+      <label><strong>Status:</strong></label>
+      {{ wash.open ? "Open" : "Close" }}
+    </div>
+<!--    <a class="badge badge-warning" routerLink="/wash/{{ wash.id }}">-->
+<!--      Edit-->
+<!--    </a>-->
+  </div>
+</div>
+<ng-template #elseSecond>
+  <p>Please click on a Tutorial...</p>
+</ng-template>
+<ng-template #elseBlock>
+  <div *ngIf="wash._id;else elseWTF">
+    <div class="edit-form">
+      <h4>Tutorial</h4>
+      <form>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="wash.name"
+            name="title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            [(ngModel)]="wash.address"
+            name="description"
+          />
+        </div>
+
+        <div class="form-group">
+          <label><strong>Status:</strong></label>
+          {{ wash.open ? "Published" : "Pending" }}
+        </div>
+      </form>
+      <div *ngIf="wash.open;else elseQWR;">
+        <button class="badge badge-primary mr-2"
+                (click)="updatePublished(false)">
+          UnPublish
+        </button>
+
+
+        <button class="badge badge-danger mr-2" (click)="deleteTutorial()">
+          Delete
+        </button>
+
+        <button
+          type="submit"
+          class="badge badge-success mb-2"
+          (click)="updateTutorial()">
+          Update
+        </button>
+        <p>{{ message }}</p>
+      </div>
+      <ng-template #elseQWR>
+        <button class="badge badge-primary mr-2" (click)="updatePublished(true)">
+          Publish
+        </button>
+      </ng-template>
+    </div>
+  </div>
+  <ng-template #elseWTF>
+    <p>Please click on a Tutorial...</p>
+  </ng-template>
+</ng-template>
