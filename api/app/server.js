@@ -124,6 +124,10 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+User.createIndexes({
+    name: 1,
+}).then(() => console.log('Index created')).catch(error => console.log(error));
+
 app.listen(port, (error) => {
     if (error) {
         console.log('Error', error);
