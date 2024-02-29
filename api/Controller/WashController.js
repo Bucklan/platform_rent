@@ -1,9 +1,0 @@
-//index
-//show
-//store
-//update
-//destroy
-//getWashByUser
-//getWashByUserAndDate
-//getWashByDate
-//getWashByDateAndUser
