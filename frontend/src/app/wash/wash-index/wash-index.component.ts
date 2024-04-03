@@ -9,7 +9,7 @@ import {
   MatCardTitle
 } from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
 import {WashService} from "../wash.service";
 import {Wash} from "../wash";
@@ -37,9 +37,10 @@ import {MatTable} from "@angular/material/table";
   styleUrl: './wash-index.component.css',
 })
 export class WashIndexComponent implements OnInit {
-  constructor(private WashService: WashService,) {
+  constructor(private WashService: WashService,private router: Router){
   }
   washes: Wash[] = []
+  token: any = localStorage.getItem('token');
   // http = inject(HttpClient);
   // getUrl = 'http://localhost:4444/api/washes';
   ngOnInit(): void {
@@ -58,4 +59,9 @@ export class WashIndexComponent implements OnInit {
     });
   }
 
+  Logout() {
+    console.log(324);
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
 }

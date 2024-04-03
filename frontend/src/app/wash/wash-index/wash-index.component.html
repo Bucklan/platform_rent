@@ -1,34 +1,40 @@
 <div class="row">
-    <div class="col-12">
+  <div class="col-12">
+    <ng-template #elseToken>
+      <button mat-stroked-button routerLink="/login">Login</button>
+      <button mat-stroked-button routerLink="/register">Register</button>
+    </ng-template>
+    <div *ngIf="token;else elseToken">
       <button mat-stroked-button routerLink="/wash/create">Create Wash</button>
       <button mat-stroked-button routerLink="/users">Users List</button>
-      <button mat-stroked-button routerLink="/register">Register</button>
-      <button mat-stroked-button routerLink="/login">Login</button>
+      <button mat-stroked-button (click)="Logout()">Logout</button>
     </div>
   </div>
-
+</div>
 
 
 <div class="container">
   <mat-card class="card" *ngFor="let wash of washes">
-  <mat-card-header>
-    <div mat-card-avatar class="header-image"></div>
-    <mat-card-title>{{wash.name}}</mat-card-title>
-    <mat-card-subtitle *ngIf="wash.open">
-      <span class="open">Open</span>
-    </mat-card-subtitle>
-    <mat-card-subtitle *ngIf="!wash.open">
-      <span class="close">Closed</span>
-    </mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image class="mat-card-image" src="https://images.theconversation.com/files/274334/original/file-20190514-60570-gfti2h.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop" alt="Photo of a Mercedes-Benz">
-  <mat-card-content>
-    <p>Address: {{wash.address}}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-stroked-button class="mat-button" (click)="deleteWash(wash._id)">Delete</button>
-  </mat-card-actions>
-</mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title>{{wash.name}}</mat-card-title>
+      <mat-card-subtitle *ngIf="wash.open">
+        <span class="open">Open</span>
+      </mat-card-subtitle>
+      <mat-card-subtitle *ngIf="!wash.open">
+        <span class="close">Closed</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image class="mat-card-image"
+         src="https://images.theconversation.com/files/274334/original/file-20190514-60570-gfti2h.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
+         alt="Photo of a Mercedes-Benz">
+    <mat-card-content>
+      <p>Address: {{wash.address}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button class="mat-button" (click)="deleteWash(wash._id)">Delete</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
 

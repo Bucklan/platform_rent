@@ -20,12 +20,13 @@ import {MatInput} from "@angular/material/input";
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
 
   constructor(private userService: UserService,
-              private router: Router) {}
+              private router: Router) {
+  }
 
   ngOnInit() {
   }
@@ -37,7 +38,9 @@ export class LoginComponent implements OnInit{
     };
 
     this.userService.login(loginData)
-      .subscribe(response => {
+      .subscribe((data) => {
+        console.log(data.token);
+        localStorage.setItem('token', data.token)
         this.router.navigate(['/']);
       }, error => {
         // Handle login errors (e.g., display error message)

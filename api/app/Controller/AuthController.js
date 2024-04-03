@@ -1,6 +1,7 @@
 const User = require("../Model/User");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const {sendEmail} = require('../services/Mail/EmailService'); // Путь к вашему EmailService.js
 
 const secretKey = 'secret123';
 
@@ -14,6 +15,10 @@ exports.RegisterUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({name, email, password: hashedPassword});
         await newUser.save();
+
+        // Отправляем уведомление на почту пользователя
+        await sendEmail(email, 'Регистрация успешна', 'Вы успешно зарегистрированы в нашем приложении.');
+
         const token = jwt.sign({email}, secretKey, {expiresIn: '1h'});
         res.json({token});
     } catch (error) {

@@ -3,4 +3,5 @@ export interface Wash{
     name: string;
     address: string;
     open: boolean;
+    image?: string
 }

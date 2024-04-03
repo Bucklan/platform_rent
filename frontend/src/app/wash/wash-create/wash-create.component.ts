@@ -5,10 +5,8 @@ import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, V
 import {NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {Router, RouterLink} from "@angular/router";
-import {MatOption, MatSelect} from "@angular/material/select";
 import {WashService} from "../wash.service";
 import {Wash} from "../wash";
-import {routes} from "../../app.routes";
 
 @Component({
   selector: 'app-wash-create',
@@ -29,17 +27,14 @@ export class WashCreateComponent {
     name: '',
     address: '',
     open: false,
+    image: '',
   }
   error: any;
   submitted = false;
 
-
-  constructor(private washService: WashService, private router: Router) {
+constructor(private washService: WashService, private router: Router) {
   }
 
-  createNewWashService(): void {
-    // Additional validation and logic can be implemented here before submitting the form
-  }
 
   addWash() {
     this.washService.create(this.wash).subscribe(response => {
@@ -48,7 +43,7 @@ export class WashCreateComponent {
         return this.router.navigateByUrl('/wash/index');
       },
       error => {
-      this.error = error.error.error;
+        this.error = error.error.error;
       },
       () => {
         console.log("The POST observable is now completed.");

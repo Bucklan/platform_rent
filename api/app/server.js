@@ -1,3 +1,4 @@
+require("dotenv").config();
 const app = require('express')();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -5,8 +6,7 @@ const cors = require('cors');
 const AuthController = require("./Controller/AuthController");
 const WashController = require("./Controller/WashController");
 const {verifyToken} = require("./Middleware/EnsureTokenIsValid");
-const {createWash} = require("./Middleware/EnsureCreateWashValidate")
-
+const {createWash} = require("./Middleware/EnsureCreateWashValidate");
 
 const port = 4444;
 app.use(cors());
@@ -25,13 +25,13 @@ app.get('/', (req, res) => {
 // Washes
 
 app.get('/api/washes', WashController.index);
-app.post('/api/washes', createWash, verifyToken, WashController.store);
-app.delete('/api/washes/:id', verifyToken, WashController.delete);
+app.post('/api/washes', createWash, WashController.store);
+app.delete('/api/washes/:id', WashController.delete);
 
 // auth
-app.get('/api/users', verifyToken, AuthController.ListUsers);
-app.post('/api/login', AuthController.LoginUser);
 app.post('/api/register', AuthController.RegisterUser);
+app.get('/api/users', AuthController.ListUsers);
+app.post('/api/login', AuthController.LoginUser);
 
 
 app.get('/protected', verifyToken, (req, res) => {

@@ -1,0 +1,8 @@
+<div>
+  <h2>Upload File</h2>
+  <input type="file" (change)="onFileSelected($event)" accept=".jpg, .png, .pdf">
+  <button (click)="onUpload()">Upload</button>
+  <div *ngIf="uploadStatus">
+    {{ uploadStatus }}
+  </div>
+</div>
